@@ -8,10 +8,10 @@
 
 ---
 
+This is **not a learning project**
+
 ## Screenshots
 ![Screenshot](images/Screenshot_2025-07-08_11-54-23.png)
-
-This is **not a learning project**
 
 ---
 
