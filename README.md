@@ -9,7 +9,7 @@
 ---
 
 ## Screenshots
-![Screenshot](images/images/Screenshot_2025-07-08_12-23-14.png)
+![Screenshot](images/Screenshot_2025-07-08_12-23-14.png)
 
 This is **not a learning project**
 
