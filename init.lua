@@ -1,5 +1,3 @@
--- ~/.config/nvim/init.lua
-
 -- === Путь к lazy.nvim ===
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -24,7 +22,23 @@ require("lazy").setup({
   "hrsh7th/cmp-buffer",
   "nvim-lualine/lualine.nvim",
   "kyazdani42/nvim-tree.lua",
-  "ellisonleao/gruvbox.nvim",
+  {
+    "ellisonleao/gruvbox.nvim",
+    priority = 1000,
+    config = function()
+      require("gruvbox").setup({
+          contrast = "hard",          -- доступные: "hard", "soft", "medium"
+          italic = {
+          strings = false,
+          comments = false,
+          operators = false,
+          folds = false,
+        },
+        terminal_colors = true,
+      })
+      vim.cmd("colorscheme gruvbox")
+    end,
+  },
   "windwp/nvim-autopairs",
   "vim-autoformat/vim-autoformat",
   {
@@ -56,7 +70,6 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.termguicolors = true
-vim.cmd("colorscheme gruvbox")
 
 -- === nvim-cmp ===
 local cmp = require("cmp")
@@ -106,10 +119,8 @@ require("nvim-tree").setup({
     },
   },
 })
-
 vim.api.nvim_set_keymap("n", "<C-n>", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
 vim.cmd("autocmd VimEnter * NvimTreeOpen")
-
 vim.api.nvim_create_autocmd("BufEnter", {
   callback = function()
     if vim.fn.winnr("$") == 1 and vim.bo.filetype == "NvimTree" then
@@ -134,8 +145,6 @@ local compile_run = Terminal:new({
     vim.cmd("startinsert!")
   end,
 })
-
-
 function _G.ToggleCompileRun()
   local ft = vim.bo.filetype
   if ft == "cpp" then
@@ -145,7 +154,6 @@ function _G.ToggleCompileRun()
     print("Unknown filetype for build/run: " .. ft)
   end
 end
-
 vim.api.nvim_set_keymap("n", "<F5>", "<cmd>lua ToggleCompileRun()<CR>", { noremap = true, silent = true })
 
 -- === Сплиты ===
@@ -166,6 +174,5 @@ function _G.CodeiumAccept()
     return "<Tab>"
   end
 end
-
 vim.api.nvim_set_keymap("i", "<C-l>", 'v:lua.CodeiumAccept()', { expr = true, silent = true })
 
