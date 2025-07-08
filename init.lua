@@ -1,4 +1,4 @@
--- === Путь к lazy.nvim ===
+-- === Path to lazy.nvim ===
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -11,7 +11,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- === Плагины ===
+-- === Plugins ===
 require("lazy").setup({
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
   "neovim/nvim-lspconfig",
@@ -27,12 +27,12 @@ require("lazy").setup({
     priority = 1000,
     config = function()
       require("gruvbox").setup({
-          contrast = "hard",          -- доступные: "hard", "soft", "medium"
-            italic = {
-            strings = false,
-            comments = false,
-            operators = false,
-            folds = false,
+        contrast = "hard",          -- options: "hard", "soft", "medium"
+        italic = {
+          strings = false,
+          comments = false,
+          operators = false,
+          folds = false,
         },
         terminal_colors = true,
       })
@@ -62,7 +62,7 @@ require("lazy").setup({
   },
 })
 
--- === Общие настройки ===
+-- === General settings ===
 vim.opt.number = true
 vim.opt.relativenumber = false
 vim.opt.tabstop = 4
@@ -71,7 +71,7 @@ vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.termguicolors = true
 
--- === nvim-cmp ===
+-- === nvim-cmp setup ===
 local cmp = require("cmp")
 cmp.setup({
   mapping = {
@@ -92,12 +92,12 @@ cmp.setup({
   },
 })
 
--- === LSP ===
+-- === LSP setup ===
 local lspconfig = require("lspconfig")
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 lspconfig.clangd.setup({ capabilities = capabilities })
 
--- === Автоформат при сохранении ===
+-- === Autoformat on save ===
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = "*.cpp",
   callback = function()
@@ -105,7 +105,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   end,
 })
 
--- === nvim-tree ===
+-- === nvim-tree setup ===
 require("nvim-tree").setup({
   view = {
     side = "left",
@@ -129,13 +129,13 @@ vim.api.nvim_create_autocmd("BufEnter", {
   end,
 })
 
--- === Статус-бар ===
+-- === Status line ===
 require("lualine").setup({ options = { theme = "gruvbox" } })
 
--- === Автозакрытие скобок ===
+-- === Auto pairs ===
 require("nvim-autopairs").setup()
 
--- === ToggleTerm и запуск C++ с вводом ===
+-- === ToggleTerm and compile/run C++ with input ===
 local Terminal = require("toggleterm.terminal").Terminal
 local compile_run = Terminal:new({
   cmd = [[bash -c 'cmake -S . -B build && cmake --build build && ./build/app; printf "\n"; read -r -p "Press Enter to exit..." < /dev/tty']],
@@ -156,17 +156,17 @@ function _G.ToggleCompileRun()
 end
 vim.api.nvim_set_keymap("n", "<F5>", "<cmd>lua ToggleCompileRun()<CR>", { noremap = true, silent = true })
 
--- === Сплиты ===
+-- === Splits ===
 vim.api.nvim_set_keymap("n", "<Leader>v", ":vsplit<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<Leader>s", ":split<CR>", { noremap = true, silent = true })
 
--- === Переключение между окнами ===
+-- === Window navigation ===
 vim.api.nvim_set_keymap("n", "<C-h>", "<C-w>h", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<C-l>", "<C-w>l", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<C-j>", "<C-w>j", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<C-k>", "<C-w>k", { noremap = true, silent = true })
 
--- === Codeium принятие подсказки (Ctrl+l) ===
+-- === Codeium accept suggestion (Ctrl+l) ===
 function _G.CodeiumAccept()
   if vim.fn["codeium#Accept"]() ~= "" then
     return vim.fn["codeium#Accept"]()
@@ -175,4 +175,3 @@ function _G.CodeiumAccept()
   end
 end
 vim.api.nvim_set_keymap("i", "<C-l>", 'v:lua.CodeiumAccept()', { expr = true, silent = true })
-
