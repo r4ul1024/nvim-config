@@ -28,11 +28,11 @@ require("lazy").setup({
     config = function()
       require("gruvbox").setup({
           contrast = "hard",          -- доступные: "hard", "soft", "medium"
-          italic = {
-          strings = false,
-          comments = false,
-          operators = false,
-          folds = false,
+            italic = {
+            strings = false,
+            comments = false,
+            operators = false,
+            folds = false,
         },
         terminal_colors = true,
       })
