@@ -7,10 +7,9 @@
 - Splits: <Leader>v (vertical), <Leader>s (horizontal)
 
 ---
+## Screenshots
 
-## Screenshot
-
-
+Example screenshot: `images/Screenshot_2025-07-08_11-54-23.png`
 ---
 
 # Конфиг Neovim
