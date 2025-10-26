@@ -1,12 +1,12 @@
-# Neovim config adapted for C++
+# Neovim Config for C++
 
-Features autocomplete, codeium for code hints, and other conveniences.
+Features autocomplete, Codeium for code hints, and other useful functions.
 
 ---
+
 ### Screenshot
 ![Screenshot](images/Screenshot_2025-10-26_14-26-29.png)
 
-# Конфигурация Neovim, адаптированная для C++
+# Конфигурация Neovim для C++
 
-Включает автодополнение, codeium для подсказок по коду и другие удобные функции.
-
+Включает автодополнение, Codeium для подсказок по коду и другие полезные функции.
